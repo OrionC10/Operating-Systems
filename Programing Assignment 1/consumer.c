@@ -22,11 +22,17 @@ int main() {
     int shm_fd;
     struct shared_data *shared_memory;
 
-    // Open shared memory table
-    shm_fd = shm_open("/myshm", O_RDWR, 0666);
-    shared_memory = (struct shared_data *) mmap(NULL, sizeof(struct shared_data), PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
+    //Open shared memory table
+    shm_fd = shm_open("/myshm", O_RDWR, 0666);    //just magic
+    shared_memory = (struct shared_data *) mmap(
+                                    NULL, 
+                                    sizeof(struct shared_data),
+                                    PROT_READ | PROT_WRITE,
+                                    MAP_SHARED, 
+                                    shm_fd, 
+                                    0);
 
-    // Consumer loop
+    //Consumer loop
     char item;
     for (int i = 0; i < 20; ++i) {
         sem_wait(&shared_memory->full);
@@ -39,7 +45,7 @@ int main() {
         sem_post(&shared_memory->empty);
     }
 
-    // Cleanup
+    //Cleanup
     munmap(shared_memory, sizeof(struct shared_data));
     return 0;
 }
