@@ -36,7 +36,7 @@ int main() {
     sem_init(&shared_memory->empty, 1, TABLE_SIZE);
 
     //Producer loop
-    char item = 'A';
+    char item = 'a';
     for (int i = 0; i < 20; ++i) {
         sem_wait(&shared_memory->empty);
         sem_wait(&shared_memory->mutex);
