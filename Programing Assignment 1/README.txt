@@ -7,11 +7,11 @@ proccesses therefore semaphores and shared memory must be used to sync them.
 Here is how to run the code.
 
   1. Go into a unix based terminal
-  2. enter the following into the comand line
+  2. enter the following into the command line
 
-      gcc producer.c -o producer -lrt -pthread
-      gcc consumer.c -o consumer -lrt -pthread
+      $ gcc producer.c -pthread -lrt -o producer
+      $ gcc consumer.c -pthread -lrt -o consumer
+      $ ./producer & ./consumer &
 
-      ./producer & ./consumer
 
 The comand line will then show the results of the code running.
