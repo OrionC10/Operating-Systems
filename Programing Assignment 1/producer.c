@@ -1,6 +1,7 @@
-//producer.cpp
-//This is the producer of the prpoducer consumer problem. 
-//  It produces characters starting at 'a' and incrimenting 20 times
+//producer.c
+//    This is the producer of the prpoducer consumer problem. 
+//    It produces characters starting at 'a' and incrimenting 20 times and places it on the 
+//    Shared memory table for the consumer to consume.
 //Matthew Crosby
 //4/5/2024
 
@@ -24,17 +25,17 @@ int main() {
     int shm_fd;
     struct shared_data *shared_memory;
 
-    // Create shared memory
+    //initalizing shared memory
     shm_fd = shm_open("/myshm", O_CREAT | O_RDWR, 0666);
     ftruncate(shm_fd, sizeof(struct shared_data));
     shared_memory = (struct shared_data *) mmap(NULL, sizeof(struct shared_data), PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
 
-    // Initialize semaphores
+    //initialize semaphores
     sem_init(&shared_memory->mutex, 1, 1);
     sem_init(&shared_memory->full, 1, 0);
     sem_init(&shared_memory->empty, 1, TABLE_SIZE);
 
-    // Producer loop
+    //Producer loop
     char item = 'A';
     for (int i = 0; i < 20; ++i) {
         sem_wait(&shared_memory->empty);
@@ -47,7 +48,7 @@ int main() {
         sem_post(&shared_memory->full);
     }
 
-    // Cleanup
+    //Cleanup
     munmap(shared_memory, sizeof(struct shared_data));
     shm_unlink("/myshm");
     return 0;
