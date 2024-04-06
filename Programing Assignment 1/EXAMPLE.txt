@@ -1,0 +1,48 @@
+Here is an example of my code compiling and running on the schools linix servers
+
+
+
+[mcrosby6@hornet project1]$ gcc consumer.c -pthread -lrt -o consumer
+[mcrosby6@hornet project1]$ gcc producer.c -pthread -lrt -o producer
+[mcrosby6@hornet project1]$ ./producer & ./consumer
+[1] 3239933
+Produced item: A
+Produced item: B
+Consumed item: A
+Consumed item: B
+Produced item: C
+Produced item: D
+Consumed item: C
+Consumed item: D
+Produced item: E
+Produced item: F
+Consumed item: E
+Consumed item: F
+Produced item: G
+Produced item: H
+Consumed item: G
+Consumed item: H
+Produced item: I
+Produced item: J
+Consumed item: I
+Consumed item: J
+Produced item: K
+Produced item: L
+Consumed item: K
+Consumed item: L
+Produced item: M
+Produced item: N
+Consumed item: M
+Consumed item: N
+Produced item: O
+Produced item: P
+Consumed item: O
+Consumed item: P
+Produced item: Q
+Produced item: R
+Consumed item: Q
+Consumed item: R
+Produced item: S
+Produced item: T
+Consumed item: S
+Consumed item: T
